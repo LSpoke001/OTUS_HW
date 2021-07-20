@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private CharacterComponent[] enemyCharacters;
 
     private Coroutine gameLoop;
-    public event Action PlayerDied;
+    public event Action PlayerDied; 
     public event Action EnemyDied;
 
     private void Start()
@@ -62,8 +62,7 @@ public class GameController : MonoBehaviour
         }
 
         isVictory = isPlayerCharacherAlive && !isEnemyCharacherAlive;
-
-        Debug.Log(isVictory ? "Victory" : "Defeat");
+        
     }
 
     private IEnumerator Turn(CharacterComponent[] playerCharacters, CharacterComponent[] enemyCharacters)
@@ -75,15 +74,14 @@ public class GameController : MonoBehaviour
             {
                 if(playerCharacters[i].HealthComponent.IsDead)
                 {
-                    Debug.Log("Character: " + playerCharacters[i].name + " is dead");
                     continue;
                 }
                 playerCharacters[i].SetTarget(GetTarget(enemyCharacters).HealthComponent);
                 //TODO: hotfix
                 yield return null; // ugly fix need to investigate
+                // Right here
                 playerCharacters[i].StartTurn();
                 yield return new WaitUntilCharacterTurn(playerCharacters[i]);
-                Debug.Log("Character: " + playerCharacters[i].name + " finished turn");
             }
 
             yield return new WaitForSeconds(.5f);
@@ -92,19 +90,16 @@ public class GameController : MonoBehaviour
             {
                 if (enemyCharacters[i].HealthComponent.IsDead)
                 {
-                    Debug.Log("Enemy character: " + enemyCharacters[i].name + " is dead");
                     continue;
                 }
                 enemyCharacters[i].SetTarget(GetTarget(playerCharacters).HealthComponent);
                 enemyCharacters[i].StartTurn();
                 yield return new WaitUntilCharacterTurn(enemyCharacters[i]);
-                Debug.Log("Enemy character: " + enemyCharacters[i].name + " finished turn");
             }
 
             yield return new WaitForSeconds(.5f);
 
             turnCounter++;
-            Debug.Log("Turn #" + turnCounter + " has been ended");
         }
     }
 
