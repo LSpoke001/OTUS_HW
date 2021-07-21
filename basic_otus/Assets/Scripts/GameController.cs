@@ -5,13 +5,16 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.Character;
+using UnityEditor;
 
 public class GameController : MonoBehaviour
 {
     [SerializeField] private CharacterComponent[] playerCharacters;
     [SerializeField] private CharacterComponent[] enemyCharacters;
+    public ButtonAttack buttonAttack;
 
     private Coroutine gameLoop;
+    private int countEnemy = 0;
     public event Action PlayerDied; 
     public event Action EnemyDied;
 
@@ -34,6 +37,12 @@ public class GameController : MonoBehaviour
     private CharacterComponent GetTarget(CharacterComponent[] characterComponents)
     {
         return characterComponents.FirstOrDefault(c => !c.HealthComponent.IsDead);
+    }
+
+    private CharacterComponent GetTargetEnemy()
+    {
+        enemyCharacters[countEnemy].GetComponentInChildren<Outline>().enabled = true;
+        return enemyCharacters[countEnemy];
     }
 
     private void GameOver()
@@ -76,10 +85,11 @@ public class GameController : MonoBehaviour
                 {
                     continue;
                 }
-                playerCharacters[i].SetTarget(GetTarget(enemyCharacters).HealthComponent);
+                yield return null;
+                
                 //TODO: hotfix
-                yield return null; // ugly fix need to investigate
-                // Right here
+                yield return new WaitUntilCharacterAttack(buttonAttack);
+                playerCharacters[i].SetTarget(GetTargetEnemy().HealthComponent);// ugly fix need to investigate
                 playerCharacters[i].StartTurn();
                 yield return new WaitUntilCharacterTurn(playerCharacters[i]);
             }
@@ -103,4 +113,29 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void ToggleOutline()
+    {
+        countEnemy++;
+        if (countEnemy == enemyCharacters.Length) countEnemy = 0;
+        Illumination();
+    }
+
+    private void Illumination()
+    {
+        if (countEnemy > 0)
+        {
+            enemyCharacters[countEnemy-1].GetComponentInChildren<Outline>().enabled = false;
+        }
+        else if (countEnemy == 0)
+        {
+            enemyCharacters[enemyCharacters.Length-1].GetComponentInChildren<Outline>().enabled = false;
+        }
+        enemyCharacters[countEnemy].GetComponentInChildren<Outline>().enabled = true;
+    }
+
+    private void Update()
+    {
+        if (enemyCharacters[countEnemy].HealthComponent.IsDead) buttonAttack.IsAttack = false;
+        else buttonAttack.IsAttack = true;
+    }
 }

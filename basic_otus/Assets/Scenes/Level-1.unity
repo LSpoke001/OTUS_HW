@@ -1117,6 +1117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 373214052}
   - component: {fileID: 373214053}
+  - component: {fileID: 373214054}
   m_Layer: 0
   m_Name: Characters
   m_TagString: Untagged
@@ -1158,6 +1159,19 @@ MonoBehaviour:
   - {fileID: 1999244646}
   enemyCharacters:
   - {fileID: 1740467063}
+  buttonAttack: {fileID: 832419748}
+--- !u!114 &373214054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373214051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416d3a1a642927643b09080087dd912a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &380332792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2411,6 +2425,7 @@ GameObject:
   - component: {fileID: 832419746}
   - component: {fileID: 832419745}
   - component: {fileID: 832419744}
+  - component: {fileID: 832419748}
   m_Layer: 5
   m_Name: DownButtonPanel
   m_TagString: Untagged
@@ -2517,6 +2532,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832419742}
   m_CullTransparentMesh: 1
+--- !u!114 &832419748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832419742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d39a9da0d68f4c8ab0738325a028c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &835478802
 GameObject:
   m_ObjectHideFlags: 0
@@ -8577,7 +8604,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button 1
+  m_Text: "\u0412\u044B\u0431\u043E\u0440 \u043F\u0440\u043E\u0442\u0438\u0432\u043D\u0438\u043A\u0430"
 --- !u!222 &1257924241
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9377,7 +9404,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button 2
+  m_Text: "\u0410\u0442\u0430\u043A\u0430"
 --- !u!222 &1496676904
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9675,7 +9702,7 @@ GameObject:
   - component: {fileID: 1568441993}
   - component: {fileID: 1568441996}
   m_Layer: 5
-  m_Name: Button2
+  m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9744,7 +9771,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1568441994}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 832419748}
+        m_TargetAssemblyTypeName: ButtonAttack, Assembly-CSharp
+        m_MethodName: AttackButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1568441994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10619,7 +10658,7 @@ GameObject:
   - component: {fileID: 1984413782}
   - component: {fileID: 1984413785}
   m_Layer: 5
-  m_Name: Button1
+  m_Name: Choice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10688,7 +10727,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1568441994}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 832419748}
+        m_TargetAssemblyTypeName: ButtonAttack, Assembly-CSharp
+        m_MethodName: ChoiceButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1984413783
 MonoBehaviour:
   m_ObjectHideFlags: 0
