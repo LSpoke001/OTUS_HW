@@ -2544,6 +2544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b6d39a9da0d68f4c8ab0738325a028c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsAttack: 1
 --- !u!1 &835478802
 GameObject:
   m_ObjectHideFlags: 0
@@ -10728,9 +10729,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 832419748}
-        m_TargetAssemblyTypeName: ButtonAttack, Assembly-CSharp
-        m_MethodName: ChoiceButton
+      - m_Target: {fileID: 373214053}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: ToggleOutline
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
