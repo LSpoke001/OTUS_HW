@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         gameLoop = StartCoroutine(GameLoop());
+        enemyCharacters[countEnemy].GetComponentInChildren<Outline>().enabled = true;
     }
     private IEnumerator GameLoop()
     {
@@ -134,6 +135,11 @@ public class GameController : MonoBehaviour
     }
 
     private void Update()
+    {
+        CheckActivityCharacter();
+    }
+
+    private void CheckActivityCharacter()
     {
         if (enemyCharacters[countEnemy].HealthComponent.IsDead) buttonAttack.IsAttack = false;
         else buttonAttack.IsAttack = true;

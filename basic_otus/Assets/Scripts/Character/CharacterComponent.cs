@@ -44,6 +44,8 @@ namespace Assets.Scripts.Character
         public float distanceFromEnemy;
         Vector3 originalPosition;
         Quaternion originalRotation;
+        [SerializeField] private string soundName;
+        private PlaySound playSound;
 
 
 
@@ -53,6 +55,7 @@ namespace Assets.Scripts.Character
             state = State.Idle;
             originalPosition = transform.position;
             originalRotation = transform.rotation;
+            playSound = GetComponentInChildren<PlaySound>();
         }
 
         public void SetState(State newState)
@@ -151,6 +154,7 @@ namespace Assets.Scripts.Character
                         animator.SetTrigger("PunchAttack");
 
                     state = State.Attack;
+                    if(playSound) playSound.Play(soundName);
                     break;
 
                 case State.Attack:
@@ -158,11 +162,13 @@ namespace Assets.Scripts.Character
 
                 case State.BeginShoot:
                     animator.SetTrigger("Shoot");
+                    if(playSound) playSound.Play(soundName);
                     state = State.Shoot;
                     break;
 
                 case State.Shoot:
                     if(weaponEffect)weaponEffect.Play();
+                    
                     break;
             }
         }

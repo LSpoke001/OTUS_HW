@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameCanvasController : MonoBehaviour
 {
     [SerializeField] private GameController controller;
+    private AudioSource win;
+    private AudioSource dead;
     enum Screen
     {
         Game,
@@ -37,6 +39,8 @@ public class GameCanvasController : MonoBehaviour
     void Start()
     {
         SetCurrentScreen(Screen.Game);
+        win = playerDeadScreen.gameObject.GetComponent<AudioSource>();
+        dead = enemyDeadScreen.gameObject.GetComponent<AudioSource>();
     }
 
     public void PauseGame()
@@ -66,9 +70,11 @@ public class GameCanvasController : MonoBehaviour
     private void PlayerDead()
     {
         SetCurrentScreen(Screen.PlayerDead);
+        win.Play();
     }
     private void EnemyDead()
     {
         SetCurrentScreen(Screen.EnemyDead);
+        dead.Play();
     }
 }

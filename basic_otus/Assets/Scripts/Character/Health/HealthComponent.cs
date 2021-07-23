@@ -18,18 +18,22 @@ namespace Assets.Scripts.Character.Health
 
         public Action<int> OnHealthChanged;
         public Action OnDead;
+        [SerializeField] private string soundName;
         
         private DamageEffect damageEffect;
+        private PlaySound playSound;
 
         private void Start()
         {
             damageEffect = GetComponent<DamageEffect>();
+            playSound = GetComponentInChildren<PlaySound>();
         }
 
         public void ApplyDamage(AttackComponent attackComponent)
         {
             health -= attackComponent.Damage;
             if (damageEffect) damageEffect.ShowDamageEffect();
+            if(playSound) playSound.Play(soundName);
             
             if(health <=0)
             {
